@@ -21,6 +21,7 @@
         <main class="py-4">
             <div class="row justify-content-center">
                 <div class="col-md-7 col-lg-5">
+                    @include('partials.alert')
                     @yield('content')
                 </div>
                 

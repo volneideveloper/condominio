@@ -23,6 +23,7 @@
         <main class="d-flex flex-nowrap">
             @include('partials.sidebar')
             <div class="py-4 flex-grow-1">
+                @include('partials.alert')
                 @yield('content')
             </div>
         </main>
