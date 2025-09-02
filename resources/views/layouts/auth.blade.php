@@ -23,10 +23,8 @@
                 <div class="col-md-7 col-lg-5">
                     @include('partials.alert')
                     @yield('content')
-                </div>
-                
-            </div>
-            
+                </div>                
+            </div>            
         </main>
     </div>
 </body>
