@@ -1,23 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.header_app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
+    <!-- Main Content -->
+    <div class="content">
+        <div class="container-fluid">
+            <h2 class="mb-4">Bem-vindo ao Condo100</h2>
+            <div class="card shadow-sm border-0 rounded-3 p-4">
+                <p>BODY DO CORdfaasdfasddsfaPo</p>
             </div>
         </div>
     </div>
-</div>
-@endsection
+
+@extends('layouts.footer_app')
+
