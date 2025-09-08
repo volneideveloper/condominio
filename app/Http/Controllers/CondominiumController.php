@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Condominium;
 use Illuminate\Http\Request;
 
-class CondominioController extends Controller
+class CondominiumController extends Controller
 {
     public function index()
     {
