@@ -2,24 +2,28 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CondominioController;
 use App\Http\Controllers\CondominiumController;
-use App\Http\Controllers\CondominiumImageController;
-use App\Http\Controllers\CondominiumStatusController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\SystemStatusController;
+use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::resource('condominio',CondominiumController::class);
-    Route::resource('condominio-imagems',CondominiumImageController::class);
-    Route::resource('condominio-status',CondominiumStatusController::class);
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+    // Rotas CRUD para Condomínios
+    Route::resource('condominiums', CondominiumController::class);
+
+    // Rotas CRUD para Usuários
+    Route::resource('users', UserController::class);
+
+
+    // Rotas CRUD para Status do sistema
+    Route::resource('system-status', SystemStatusController::class);
 });
-

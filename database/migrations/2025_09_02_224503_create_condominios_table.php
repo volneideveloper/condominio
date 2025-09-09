@@ -17,10 +17,11 @@ return new class extends Migration
             $table->string('address');
             $table->string('number')->nullable();
             $table->string('complement')->nullable();
-            $table->string('neighborhood')->nullable();
+            $table->string('uf')->nullable();
             $table->string('zip_code')->nullable();
-            $table->foreignId('city_id')->constrained('cities');
-            $table->foreignId('condominium_status_id')->constrained('condominium_status');
+            $table->string('city')->nullable();
+            $table->integer('system_status_id')->nullable();
+            $table->string('condominium_image')->nullable(); // <- adiciona a imagem
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('condominios');
+        Schema::dropIfExists('condominiums');
     }
 };

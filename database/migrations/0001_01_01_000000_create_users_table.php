@@ -18,8 +18,10 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('telefone')->nullable();
+            $table->string('profile_image')->nullable(); // ← nova coluna para imagem de perfil
             $table->boolean('is_active')->default(true);
             $table->rememberToken();
+            $table->integer('system_status_id')->nullable();
             $table->timestamps();
         });
 

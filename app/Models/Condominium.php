@@ -2,30 +2,34 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Condominium extends Model
 {
+    use HasFactory;
+    
+    protected $table = 'condominiums';
+
     protected $fillable = [
         'name',
         'address',
         'number',
         'complement',
-        'neighborhood',
+        'uf',
         'zip_code',
-        'city_id',
-        'condominium_status_id',
+        'city',
+        'system_status_id',
+        'condominium_image',
     ];
 
-    public function city() {
-        return $this->belongsTo(City::class);
+    public function systemStatus()
+    {
+        return $this->belongsTo(SystemStatus::class);
     }
 
-    public function status() {
-        return $this->belongsTo(CondominiumStatus::class, 'condominium_status_id');
-    }
-
-    public function images() {
-        return $this->hasMany(CondominiumImage::class);
+    public function images()
+    {
+        return $this->hasMany(Image::class, 'imageable_id')->where('imageable_type', self::class);
     }
 }
