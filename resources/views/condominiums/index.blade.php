@@ -3,61 +3,197 @@
 <div class="content">
     <div class="container-fluid">
         <h2 class="mb-4">Condomínios</h2>
-        <div class="card shadow-sm border-0 rounded-3 p-4">
-            <a href="{{ route('condominiums.create') }}" class="btn btn-primary mb-3">Novo Condomínio</a>
+        <div class="content-card">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <a href="{{ route('condominiums.create') }}" class="btn btn-primary btn-new-record">
+                    <i class="bi bi-plus-lg me-2"></i> Novo Condomínio
+                </a>
+            </div>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th></th> <!-- Coluna da imagem -->
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Endereço</th>
-                    <th>UF</th>
-                    <th>Cidade</th>
-                    <th>Status</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($condominiums as $cond)
-                <tr>
-                    <td>
-                        @if($cond->condominium_image)
-                            <img src="{{ asset('storage/' . $cond->condominium_image) }}" 
-                                alt="Imagem do Condomínio" 
-                                class="rounded-circle" width="40" height="40">
-                        @else
-                            <div class="d-flex justify-content-center align-items-center rounded-circle bg-secondary text-white" 
-                                style="width:40px; height:40px;">
-                                <i class="bi bi-building"></i>
-                            </div>
-                        @endif
-                    </td>
-                    <td>{{ $cond->id }}</td>
-                    <td>{{ $cond->name }}</td>
-                    <td>{{ $cond->address }}</td>
-                    <td>{{ $cond->uf }}</td>
-                    <td>{{ $cond->city }}</td>
-                    <td>{{ $cond->systemStatus ? $cond->systemStatus->name : 'Sem status' }}</td>
-                    <td>
-                        <a href="{{ route('condominiums.show', $cond->id) }}" class="btn btn-sm btn-info">Ver</a>
-                        <a href="{{ route('condominiums.edit', $cond->id) }}" class="btn btn-sm btn-warning">Editar</a>
-                        <form action="{{ route('condominiums.destroy', $cond->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+            <div class="table-responsive">
+                <table class="table table-dark table-hover table-striped custom-table">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Endereço</th>
+                            <th scope="col">UF</th>
+                            <th scope="col">Cidade</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($condominiums as $cond)
+                        <tr>
+                            <td>
+                                @if($cond->condominium_image)
+                                    <img src="{{ asset('storage/' . $cond->condominium_image) }}" 
+                                        alt="Imagem do Condomínio" 
+                                        class="rounded-circle condominium-image">
+                                @else
+                                    <div class="rounded-circle bg-secondary d-flex justify-content-center align-items-center condominium-placeholder">
+                                        <i class="bi bi-building"></i>
+                                    </div>
+                                @endif
+                            </td>
+                            <td>{{ $cond->id }}</td>
+                            <td>{{ $cond->name }}</td>
+                            <td>{{ $cond->address }}</td>
+                            <td>{{ $cond->uf }}</td>
+                            <td>{{ $cond->city }}</td>
+                            <td>
+                                <span class="badge {{ $cond->systemStatus ? 'bg-success-dark' : 'bg-secondary' }}">
+                                    {{ $cond->systemStatus ? $cond->systemStatus->name : 'Sem status' }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Ações">
+                                    <a href="{{ route('condominiums.show', $cond->id) }}" class="btn btn-sm btn-action" title="Ver">
+                                        <i class="bi bi-eye-fill icon-action-info"></i>
+                                    </a>
+                                    <a href="{{ route('condominiums.edit', $cond->id) }}" class="btn btn-sm btn-action" title="Editar">
+                                        <i class="bi bi-pencil-fill icon-action-warning"></i>
+                                    </a>
+                                    <form action="{{ route('condominiums.destroy', $cond->id) }}" method="POST" class="d-inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-action" title="Excluir">
+                                            <i class="bi bi-trash-fill icon-action-danger"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-
-            {{ $condominiums->links() }}
+            <div class="d-flex justify-content-center mt-4">
+                {{ $condominiums->links() }}
+            </div>
         </div>
     </div>
 </div>
+
+<style>
+    /* Estilos para a tabela */
+    .content-card {
+        padding: 2.5rem;
+    }
+    .btn-new-record {
+        background-color: var(--primary-color) !important;
+        border-color: var(--primary-color) !important;
+        color: var(--dark-card) !important;
+        font-weight: 600;
+        border-radius: 0.75rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(34, 197, 94, 0.2);
+    }
+    .btn-new-record:hover {
+        background-color: var(--primary-light) !important;
+        border-color: var(--primary-light) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(34, 197, 94, 0.3);
+    }
+    .custom-table {
+        border-radius: 1rem;
+        overflow: hidden;
+        margin-bottom: 0;
+    }
+    .custom-table th, .custom-table td {
+        vertical-align: middle;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 1rem;
+        color: var(--text-color-light);
+    }
+    .custom-table thead th {
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        font-weight: 600;
+        color: var(--text-color-muted);
+    }
+    .custom-table tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    /* Estilos para a imagem/placeholder */
+    .condominium-image, .condominium-placeholder {
+        width: 45px;
+        height: 45px;
+        object-fit: cover;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .condominium-placeholder i {
+        font-size: 1.25rem;
+    }
+
+    /* Botões de Ação - Estilo base com fundo escuro */
+    .btn-action {
+        border-radius: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        transition: all 0.2s ease;
+        background-color: var(--dark-card);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--text-color-light); /* Cor do texto padrão para garantir a visibilidade */
+    }
+    .btn-action:hover {
+        transform: translateY(-1px);
+        background-color: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Cores dos ícones */
+    .icon-action-info {
+        color: #3b82f6; /* Azul */
+    }
+    .icon-action-warning {
+        color: #f59e0b; /* Amarelo */
+    }
+    .icon-action-danger {
+        color: #ef4444; /* Vermelho */
+    }
+
+    /* Badges de status */
+    .badge {
+        font-size: 0.8em;
+        padding: 0.5em 0.8em;
+        border-radius: 1rem;
+    }
+    .bg-success-dark {
+        background-color: var(--primary-color) !important;
+        color: var(--dark-card) !important;
+    }
+    .bg-secondary {
+        background-color: var(--text-color-muted) !important;
+    }
+
+    /* Estilo da Paginação */
+    .pagination .page-item .page-link {
+        background-color: var(--dark-card);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--text-color-light);
+        transition: all 0.3s ease;
+        border-radius: 0.5rem;
+        margin: 0 0.25rem;
+    }
+    .pagination .page-item .page-link:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-color: var(--primary-color);
+        color: var(--primary-light);
+    }
+    .pagination .page-item.active .page-link {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: var(--dark-card);
+        font-weight: 600;
+        box-shadow: 0 4px 10px rgba(34, 197, 94, 0.2);
+    }
+    .pagination .page-item.active .page-link:hover {
+        background-color: var(--primary-light);
+        border-color: var(--primary-light);
+    }
+</style>
 
 @extends('layouts.footer_app')
