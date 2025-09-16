@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->rememberToken();
             $table->integer('system_status_id')->nullable();
+            $table->string('role')->default('morador'); // ← nova coluna para o papel do usuário
             $table->timestamps();
         });
 

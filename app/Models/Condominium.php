@@ -32,4 +32,14 @@ class Condominium extends Model
     {
         return $this->hasMany(Image::class, 'imageable_id')->where('imageable_type', self::class);
     }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

@@ -74,4 +74,10 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index')->with('success', 'Usuário deletado com sucesso.');
     }
+
+    public function payments($id)
+    {
+        $user = User::with('payments')->findOrFail($id);
+        return view('users.payments', compact('user'));
+    }
 }

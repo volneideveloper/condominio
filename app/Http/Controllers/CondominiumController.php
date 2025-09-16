@@ -71,4 +71,10 @@ class CondominiumController extends Controller
         $condominium->delete();
         return redirect()->route('condominiums.index')->with('success', 'Condomínio deletado com sucesso.');
     }
+
+    public function payments($id)
+    {
+        $condominium = Condominium::with('payments')->findOrFail($id);
+        return view('condominiums.payments', compact('condominium'));
+    }
 }

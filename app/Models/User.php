@@ -9,6 +9,12 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    const SUPER_ADMIN_ROLE = 'super_admin';
+    const ADMIN_ROLE = 'admin';
+    const APARTAMENT_MANAGER_ROLE = 'sindico';    
+    const RESIDENT_ROLE = 'morador';
+
+
     use HasFactory, Notifiable;
 
     protected $fillable = [
@@ -29,5 +35,35 @@ class User extends Authenticatable
     public function systemStatus()
     {
         return $this->belongsTo(SystemStatus::class);
+    }
+
+    public function condominium()
+    {
+        return $this->belongsTo(Condominium::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function isSuperAdmin()
+    {
+        return $this->role === self::SUPER_ADMIN_ROLE;
+    }
+    
+    public function isAdmin()
+    {
+        return $this->role === self::ADMIN_ROLE;
+    }
+
+    public function isApartamentManager()
+    {
+        return $this->role === self::APARTAMENT_MANAGER_ROLE;
+    }
+
+    public function isResident()
+    {
+        return $this->role === self::RESIDENT_ROLE;
     }
 }

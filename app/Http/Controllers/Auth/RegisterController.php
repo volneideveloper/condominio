@@ -63,12 +63,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $role = User::RESIDENT_ROLE;
+        if(!empty($data['role'])){
+            $role = $data['role'];
+        }
+        
         $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => $role,
+            'system_status_id' => 1, // Ativo por padrão
+            'is_active' => true,
         ]);
-        $user->assignRole('Morador');
+
         return $user;
     }
 }

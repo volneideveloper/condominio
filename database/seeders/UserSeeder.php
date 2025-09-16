@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
             'is_active' => true,
             'system_status_id' => 1,
             'profile_image' => 'images/users/EuXRJssoqLoy7cUjwQ1Vm46Y47hoKxyrsSsuKwSj.jpg', // ← caminho relativo
+            'role' => User::SUPER_ADMIN_ROLE ,
         ]);
 
         // Exemplo de mais usuários sem imagem
