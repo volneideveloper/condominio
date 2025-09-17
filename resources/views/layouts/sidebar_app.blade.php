@@ -23,6 +23,12 @@
         </li>
 
         <li class="nav-item">
+            <a href="{{ route('payments.index') }}" class="nav-link @if(Request::routeIs('payments.*')) active @endif">
+                <i class="bi bi-currency-dollar"></i> Pagamentos
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a href="{{ route('system-status.index') }}" class="nav-link @if(Request::routeIs('system-status.*')) active @endif">
                 <i class="bi bi-sliders2-vertical"></i> Status do Sistema
             </a>
