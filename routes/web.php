@@ -6,6 +6,7 @@ use App\Http\Controllers\CondominiumController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SystemStatusController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,11 +18,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-    Route::get('condominiums/{id}/payments', [CondominiumController::class, 'payments'])->name('condominiums.payments');
+    
     // Rotas CRUD para Condomínios
     Route::resource('condominiums', CondominiumController::class);
 
-    Route::get('users/{id}/payments', [UserController::class, 'payments'])->name('users.payments');
     // Rotas CRUD para Usuários
     Route::resource('users', UserController::class);
 
@@ -30,5 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('system-status', SystemStatusController::class);
 
     // Rotas CRUD para Pagamentos
-    Route::resource('payments', App\Http\Controllers\PaymentController::class);
+    Route::resource('payments', PaymentController::class);
+    Route::get('users/{id}/payments', [UserController::class, 'payments'])->name('users.payments');
+    Route::get('condominiums/{id}/payments', [CondominiumController::class, 'payments'])->name('condominiums.payments');
 });

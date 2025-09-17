@@ -28,6 +28,13 @@
             </a>
         </li>
 
+        {{-- Novo item para Pagamentos do Usuário Logado --}}
+        <li class="nav-item">
+            <a href="{{ route('users.payments', Auth::user()->id) }}" class="nav-link @if(Request::routeIs('users.payments')) active @endif">
+                <i class="bi bi-journal-check"></i> Meus Pagamentos
+            </a>
+        </li>
+
         <li class="nav-item">
             <a href="{{ route('system-status.index') }}" class="nav-link @if(Request::routeIs('system-status.*')) active @endif">
                 <i class="bi bi-sliders2-vertical"></i> Status do Sistema
