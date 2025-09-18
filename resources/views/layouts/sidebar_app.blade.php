@@ -17,29 +17,30 @@
         </li>
 
         <li class="nav-item">
-            <a href="{{ route('users.index') }}" class="nav-link @if(Request::routeIs('users.*')) active @endif">
-                <i class="bi bi-person-circle"></i> Usuários
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="{{ route('payments.index') }}" class="nav-link @if(Request::routeIs('payments.*')) active @endif">
-                <i class="bi bi-currency-dollar"></i> Pagamentos
-            </a>
-        </li>
-
-        {{-- Novo item para Pagamentos do Usuário Logado --}}
-        <li class="nav-item">
             <a href="{{ route('users.payments', Auth::user()->id) }}" class="nav-link @if(Request::routeIs('users.payments')) active @endif">
                 <i class="bi bi-journal-check"></i> Meus Pagamentos
             </a>
         </li>
+        
+        @if(auth()->user()->isAdmin() or auth()->user()->isSuperAdmin())
+            <li class="nav-item">
+                <a href="{{ route('users.index') }}" class="nav-link @if(Request::routeIs('users.*')) active @endif">
+                    <i class="bi bi-person-circle"></i> Usuários
+                </a>
+            </li>
 
-        <li class="nav-item">
-            <a href="{{ route('system-status.index') }}" class="nav-link @if(Request::routeIs('system-status.*')) active @endif">
-                <i class="bi bi-sliders2-vertical"></i> Status do Sistema
-            </a>
-        </li>
+            <li class="nav-item">
+                <a href="{{ route('payments.index') }}" class="nav-link @if(Request::routeIs('payments.*')) active @endif">
+                    <i class="bi bi-currency-dollar"></i> Pagamentos
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('system-status.index') }}" class="nav-link @if(Request::routeIs('system-status.*')) active @endif">
+                    <i class="bi bi-sliders2-vertical"></i> Status do Sistema
+                </a>
+            </li>
+        @endif
     </ul>
 
     <div class="sidebar-footer">
