@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Condo100 - Acesso</title>
+    <title>Condo100</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -140,7 +140,7 @@
                 <i class="bi bi-buildings-fill"></i>
             </div>
         </div>
-        <h3 class="login-title">Acesso Condo100</h3>
+        <h3 class="login-title">Condo100</h3>
         <form method="POST" action="{{ route('login') }}">
             @csrf
             
