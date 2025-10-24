@@ -66,4 +66,9 @@ class User extends Authenticatable
     {
         return $this->role === self::RESIDENT_ROLE;
     }
+
+    public function units()
+    {
+        return $this->hasMany(Unit::class, 'owner_id');
+    }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SystemStatusController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\UnitController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -33,4 +34,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('payments', PaymentController::class);
     Route::get('users/{id}/payments', [UserController::class, 'payments'])->name('users.payments');
     Route::get('condominiums/{id}/payments', [CondominiumController::class, 'payments'])->name('condominiums.payments');
+
+    Route::resource('units', UnitController::class);
 });

@@ -42,4 +42,9 @@ class Condominium extends Model
     {
         return $this->hasMany(Payment::class);
     }
+
+    public function units()
+    {
+        return $this->hasMany(Unit::class);
+    }
 }
